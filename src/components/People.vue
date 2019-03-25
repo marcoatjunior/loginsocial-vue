@@ -1,3 +1,4 @@
+<!--
 <template>
   <div class="people">
     <h1>Lista de Pessoas</h1>
@@ -27,36 +28,34 @@
 
 <script>
 
-  import { namesRef } from '../main';
-
-
 export default {
-  name: 'Pessoas',
+  name: 'people',
   data () {
     return {
       name: ''
     }
   },
   methods: {
-    submitName(){
-      namesRef.push({ name: this.name, edit: false });
+    submitName: function(){
+      this.names.push({ name: this.name, edit: false });
       this.name = '';
     },
-    removePerson(key){
-      namesRef.child(key).remove();
+    removePerson: function(key){
+      this.names.child(key).remove();
     },
-    setEditPerson(key){
-      namesRef.child(key).update({ edit: true });
+    setEditPerson: function(key){
+      this.names.child(key).update({ edit: true });
     },
-    cancelEdit(key){
-      namesRef.child(key).update({ edit: false });
+    cancelEdit: function(key){
+      this.names.child(key).update({ edit: false });
     },
-    editPerson(person){
+    editPerson: function(person){
       const key = person['.key'];
-      namesRef.child(key).set({ name: person.name, edit: false });
-    }
+      this.names.child(key).set({ name: person.name, edit: false });
+    },
   }
 }
+
 </script>
 
 <style scoped>
@@ -90,3 +89,4 @@ export default {
     color: #42b983;
   }
 </style>
+-->

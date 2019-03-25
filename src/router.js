@@ -1,12 +1,15 @@
 import firebase from 'firebase';
 import Vue from 'vue';
 import Router from 'vue-router';
+import VueFire from 'vuefire';
 
 import Home from '@/views/Home';
 import Login from '@/views/Login';
 import SignUp from '@/views/SignUp';
+import {namesRef} from "./firebase";
 
 Vue.use(Router);
+Vue.use(VueFire);
 
 const router = new Router({
   routes: [
@@ -32,6 +35,9 @@ const router = new Router({
       path: '/home',
       name: 'Home',
       component: Home,
+      firebase: {
+        names: namesRef
+      },
       meta: {
         requiresAuth: true
       }

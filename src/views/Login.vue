@@ -1,0 +1,82 @@
+<template>
+  <div class="login">
+    <h3>Acesso ao sistema</h3>
+    <input type="text" v-model="email" placeholder="E-mail"><br>
+    <input type="password" v-model="password" placeholder="Senha"><br>
+    <button @click="login">Entrar</button>
+    <p>
+      ou acesse com uma conta Google <br>
+      <button @click="socialLogin" class="social-button">
+        Login com Google
+      </button>
+    </p>
+    <p>Não possui uma conta ? Você pode <router-link to="/sign-up">criar aqui</router-link></p>
+  </div>
+</template>
+
+<script>
+  import firebase from 'firebase';
+
+  export default {
+    name: 'login',
+    data() {
+      return {
+        email: '',
+        password: ''
+      }
+    },
+    methods: {
+      login: function() {
+        firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(
+          (user) => {
+            for (var [key, value] of Object.entries(user.credential)) {
+              localStorage.setItem(key, value);
+            }
+            this.$router.replace('home')
+          },
+          (err) => {
+            console.log(err.message);
+            alert('Ocorreu um erro ao efetuar o login. Por favor, tente novamente.');
+          }
+        );
+      },
+      socialLogin() {
+        const provider = new firebase.auth.GoogleAuthProvider;
+
+        firebase.auth().signInWithPopup(provider).then((result) => {
+          for (var [key, value] of Object.entries(result.credential)) {
+            localStorage.setItem(key, value);
+          }
+          this.$router.replace('home');
+        }).catch((err) => {
+          console.log(err.message);
+          alert('A janela de conexão foi fechada. Por favor, tente novamente.');
+        });
+      }
+    }
+  }
+</script>
+
+<style scoped>
+  .login {
+    margin-top: 40px;
+  }
+  input {
+    margin: 10px 0;
+    width: 20%;
+    padding: 15px;
+  }
+  button {
+    margin-top: 20px;
+    width: 10%;
+    cursor: pointer;
+  }
+  p {
+    margin-top: 40px;
+    font-size: 13px;
+  }
+  p a {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+</style>

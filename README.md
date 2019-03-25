@@ -1,1 +1,4 @@
-# database-test
+``` bash
+npm install
+npm run serve
+```

@@ -19,6 +19,7 @@
 </template>
 
 <script>
+
   import firebase from 'firebase';
 
   export default {
@@ -33,6 +34,7 @@
       login: function() {
         firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(
           (user) => {
+            // login(result.additionalUserInfo.profile.name, result.additionalUserInfo.profile.email);
             for (var [key, value] of Object.entries(user.credential)) {
               localStorage.setItem(key, value);
             }
@@ -48,6 +50,7 @@
         const provider = new firebase.auth.GoogleAuthProvider;
 
         firebase.auth().signInWithPopup(provider).then((result) => {
+
           for (var [key, value] of Object.entries(result.credential)) {
             localStorage.setItem(key, value);
           }

@@ -32,27 +32,39 @@
           <td class="text-center" v-else>
             <input class="input input-sm" type="text" v-model="personName.documents.cpf" placeholder="Nome"/>
           </td>
-          <td class="text-center">{{ personName.data_acesso }}</td>
-          <td class="text-center">{{ personName.role }}</td>
-          <td class="text-center" v-if="!personName.edit">
-            <a @click="setEditPerson(personName['.key'])" class="text-primary">
-              <i class="glyphicon glyphicon-pencil"></i> Editar
-            </a>
+          <td class="text-center">
+            {{ personName.data_cadastro }}
           </td>
-          <td class="text-center" v-else>
-            <a @click="editPerson(personName)" class="text-primary">
-              <i class="glyphicon glyphicon-pencil"></i> Salvar
-            </a>
+          <td class="text-center">
+            {{ personName.role == 1 ? "Administrador" : "Visitante"}}
           </td>
           <td class="text-center" v-if="!personName.edit">
-            <a @click="removePerson(personName['.key'])" class="text-primary">
-              <i class="glyphicon glyphicon-trash"></i> Excluir
-            </a>
+            <div v-if="personName.role == 1">
+              <a @click="setEditPerson(personName['.key'])" class="text-primary">
+                <i class="glyphicon glyphicon-pencil"></i> Editar
+              </a>
+            </div>
           </td>
           <td class="text-center" v-else>
-            <a @click="cancelEdit(personName['.key'])" class="text-primary">
-              <i class="glyphicon glyphicon-trash"></i> Cancelar
-            </a>
+            <div v-if="personName.role == 1">
+              <a @click="editPerson(personName)" class="text-primary">
+                <i class="glyphicon glyphicon-pencil"></i> Salvar
+              </a>
+            </div>
+          </td>
+          <td class="text-center" v-if="!personName.edit">
+            <div v-if="personName.role == 1">
+              <a @click="removePerson(personName['.key'])" class="text-primary">
+                <i class="glyphicon glyphicon-trash"></i> Excluir
+              </a>
+            </div>
+          </td>
+          <td class="text-center" v-else>
+            <div v-if="personName.role == 1">
+              <a @click="cancelEdit(personName['.key'])" class="text-primary">
+                <i class="glyphicon glyphicon-trash"></i> Cancelar
+              </a>
+            </div>
           </td>
         </tr>
         </tbody>
@@ -104,6 +116,8 @@ export default {
           documents: {
               cpf: person.documents.cpf
           },
+          role: person.role,
+          data_cadastro: person.data_cadastro,
           edit: false
       });
     },

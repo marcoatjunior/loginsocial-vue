@@ -5,10 +5,10 @@
     <input type="password" v-model="password" placeholder="Senha"><br>
     <button @click="login">Entrar</button>
     <p>
-      ou acesse com uma conta Google <br>
-      <button @click="socialLogin" class="social-button">
-        Login com Google
-      </button>
+      ou acesse com uma conta do Google <br><br>
+      <a @click="socialLogin" class="social-button">
+        <img src="http://pngimg.com/uploads/google/google_PNG19635.png" width="30" height="30" title="Google">
+      </a>
     </p>
     <p>Não possui uma conta ? Você pode <router-link to="/sign-up">criar aqui</router-link></p>
   </div>

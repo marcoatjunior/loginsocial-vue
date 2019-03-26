@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
+    <img alt="Vue logo" src="https://firebase.google.com/images/brand-guidelines/logo-standard.png?hl=pt-br" width="250" height="80">
     <router-view/>
   </div>
 </template>
@@ -12,9 +12,6 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-}
-#nav {
-  padding: 30px;
 }
 
 #nav a {

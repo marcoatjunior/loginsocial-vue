@@ -1,10 +1,15 @@
 <template>
   <div class="sign-up">
-    <p>Bem-vindo à tela de cadastro!</p>
-    <input type="text" v-model="email" placeholder="E-mail"><br>
-    <input type="password" v-model="password" placeholder="Senha"><br>
-    <button @click="signUp">Cadastrar</button>
-    <span>Voltar à <router-link to="/login">tela inicial</router-link>.</span>
+      <div class="row">
+          <div class="col-md-12">
+              <h3>Cadastre-se no formulário abaixo</h3>
+              <input type="text" v-model="email" placeholder="E-mail"><br>
+              <input type="password" v-model="password" placeholder="Senha"><br>
+              <button @click="signUp" class="btn btn-primary">Cadastrar</button>
+              <br>
+              <p><router-link to="/login">Voltar a tela inicial</router-link></p>
+          </div>
+      </div>
   </div>
 </template>
 
@@ -30,7 +35,7 @@
           },
           (err) => {
               console.log(err.message);
-              alert('Ocorreu um erro ao efetuar o login. Por favor, tente novamente.');
+              alert('Ocorreu um erro ao efetuar o cadastro. Por favor, tente novamente.');
           }
         );
       }
@@ -40,21 +45,24 @@
 
  <style scoped>
   .sign-up {
-    margin-top: 40px;
+    margin-top: 20px;
   }
   input {
-    margin: 10px 0;
-    width: 20%;
-    padding: 15px;
+      margin: 10px 0;
+      width: 25%;
+      padding: 15px;
   }
   button {
-    margin-top: 10px;
-    width: 10%;
-    cursor: pointer;
+      margin-top: 20px;
+      width: 15%;
+      cursor: pointer;
   }
   span {
     display: block;
     margin-top: 20px;
     font-size: 11px;
+  }
+  p {
+      margin-top: 20px;
   }
 </style>

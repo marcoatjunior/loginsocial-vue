@@ -1,16 +1,20 @@
 <template>
   <div class="login">
-    <h3>Acesso ao sistema</h3>
-    <input type="text" v-model="email" placeholder="E-mail"><br>
-    <input type="password" v-model="password" placeholder="Senha"><br>
-    <button @click="login">Entrar</button>
-    <p>
-      ou acesse com uma conta do Google <br><br>
-      <a @click="socialLogin" class="social-button">
-        <img src="http://pngimg.com/uploads/google/google_PNG19635.png" width="30" height="30" title="Google">
-      </a>
-    </p>
-    <p>Não possui uma conta ? Você pode <router-link to="/sign-up">criar aqui</router-link></p>
+    <div class="row">
+      <div class="col-md-12">
+        <h3>Acesso ao sistema</h3>
+        <input type="text" v-model="email" placeholder="E-mail"><br>
+        <input type="password" v-model="password" placeholder="Senha"><br>
+        <button @click="login" class="btn btn-primary">Entrar</button>
+        <p>Não possui uma conta ? Você pode <router-link to="/sign-up">criar aqui</router-link></p>
+        <p>
+          ou acesse com uma conta do Google <br><br>
+          <a @click="socialLogin" class="social-button">
+            <img src="http://pngimg.com/uploads/google/google_PNG19635.png" width="30" height="30" title="Google">
+          </a>
+        </p>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -59,20 +63,20 @@
 
 <style scoped>
   .login {
-    margin-top: 40px;
+    margin-top: 20px;
   }
   input {
     margin: 10px 0;
-    width: 20%;
+    width: 25%;
     padding: 15px;
   }
   button {
     margin-top: 20px;
-    width: 10%;
+    width: 15%;
     cursor: pointer;
   }
   p {
-    margin-top: 40px;
+    margin-top: 20px;
     font-size: 13px;
   }
   p a {

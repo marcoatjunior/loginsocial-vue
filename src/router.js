@@ -3,6 +3,16 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import VueFire from 'vuefire';
 
+import BootstrapVue from 'bootstrap-vue';
+import BModal from 'bootstrap-vue/es/components/modal/modal';
+import BModalDirective from 'bootstrap-vue/es/directives/modal/modal';
+
+Vue.component('b-modal', BModal)
+Vue.directive('b-modal', BModalDirective)
+
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
+
 import Home from '@/views/Home';
 import Login from '@/views/Login';
 import SignUp from '@/views/SignUp';
@@ -10,6 +20,8 @@ import {namesRef} from "./firebase";
 
 Vue.use(Router);
 Vue.use(VueFire);
+Vue.use(BootstrapVue);
+
 
 const router = new Router({
   routes: [

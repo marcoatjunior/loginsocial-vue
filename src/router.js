@@ -14,7 +14,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 import Home from '@/views/Home'
 import Login from '@/views/Login'
 import SignUp from '@/views/SignUp'
-import {namesRef} from "./firebase"
+import {peopleRef} from "./firebase"
 
 Vue.use(Router);
 Vue.use(VueFire);
@@ -29,7 +29,7 @@ const router = new Router({
     { path: '/', redirect: '/login' },
     { path: '/login', name: 'Login', component: Login },
     { path: '/sign-up', name: 'SignUp', component: SignUp },
-    { path: '/home', name: 'Home', component: Home, firebase: { names: namesRef }, meta: { requiresAuth: true } }
+    { path: '/home', name: 'Home', component: Home, firebase: { names: peopleRef }, meta: { requiresAuth: true } }
   ]
 });
 

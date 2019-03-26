@@ -7,12 +7,13 @@
           <th>Nome</th>
           <th>E-mail</th>
           <th>CPF</th>
-          <th>Data de Acesso</th>
+          <th>Data Cadastro</th>
+          <th>Permissão</th>
           <th colspan="2">Ação</th>
         </tr>
         </thead>
         <tbody>
-        <tr v-for="personName of names" :key="personName['.key']">
+        <tr v-for="personName of people" :key="personName['.key']">
           <td class="text-center" v-if="!personName.edit">
             {{ personName.name }}
           </td>
@@ -26,19 +27,20 @@
             <input class="input input-sm" type="text" v-model="personName.email" placeholder="Nome"/>
           </td>
           <td class="text-center" v-if="!personName.edit">
-            {{ personName.cpf }}
+            {{ personName.documents.cpf }}
           </td>
           <td class="text-center" v-else>
-            <input class="input input-sm" type="text" v-model="personName.cpf" placeholder="Nome"/>
+            <input class="input input-sm" type="text" v-model="personName.documents.cpf" placeholder="Nome"/>
           </td>
           <td class="text-center">{{ personName.data_acesso }}</td>
+          <td class="text-center">{{ personName.role }}</td>
           <td class="text-center" v-if="!personName.edit">
             <a @click="setEditPerson(personName['.key'])" class="text-primary">
               <i class="glyphicon glyphicon-pencil"></i> Editar
             </a>
           </td>
           <td class="text-center" v-else>
-            <a @click="editPerson(personName['.key'])" class="text-primary">
+            <a @click="editPerson(personName)" class="text-primary">
               <i class="glyphicon glyphicon-pencil"></i> Salvar
             </a>
           </td>
@@ -61,7 +63,7 @@
 
 <script>
 
-import {namesRef} from "../firebase";
+    import {peopleRef, rolesRef} from "../firebase";
 
 export default {
   name: 'People',
@@ -69,34 +71,39 @@ export default {
         return {
             name: "",
             email: "",
-            cpf: "",
-            data_acesso: ""
+            data_acesso: "",
+            role: "",
+            documents: {
+                cpf: ""
+            }
         };
     },
   firebase: {
-    names: namesRef
+    people: peopleRef,
+    roles: rolesRef
   },
   methods: {
-
     removePerson: function(key){
-      namesRef.child(key).remove();
+        peopleRef.child(key).remove();
     },
     setEditPerson: function(key){
-      namesRef.child(key).update({
+        peopleRef.child(key).update({
           edit: true
       });
     },
     cancelEdit: function(key){
-      namesRef.child(key).update({
+        peopleRef.child(key).update({
           edit: false
       });
     },
     editPerson: function(person){
       const key = person['.key'];
-      namesRef.child(key).set({
+        peopleRef.child(key).set({
           name: person.name,
           email: person.email,
-          cpf: person.cpf,
+          documents: {
+              cpf: person.documents.cpf
+          },
           edit: false
       });
     },

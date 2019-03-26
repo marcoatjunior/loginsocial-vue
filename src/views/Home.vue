@@ -26,9 +26,10 @@
 
 <script>
 
-import firebase from "firebase";
-import People from "@/components/People.vue";
+import People   from "@/components/People.vue";
 import Register from "@/components/Register.vue";
+
+import firebase from "firebase";
 
 export default {
   name: "home",

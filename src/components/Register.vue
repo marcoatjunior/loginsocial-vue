@@ -66,6 +66,12 @@ export default {
   methods: {
     checkForm: function () {
       if (this.name && this.email && this.documents.cpf) {
+
+        /*var message = 'Teste Storage';
+        storageRef.putString(message).then(function() {
+          console.log('Uploaded a raw string!');
+        });*/
+
         for (var [key, object] of Object.entries(this.people)) {
           if (object.email == this.email) {
             this.errors = [];

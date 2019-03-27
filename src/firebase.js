@@ -10,5 +10,8 @@ const app = initializeApp({
 });
 
 export const db = app.database();
+// export const storage = app.storage();
+
 export const peopleRef = db.ref('people');
 export const rolesRef = db.ref('roles');
+// export const storageRef = storage.ref();

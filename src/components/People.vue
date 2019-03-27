@@ -33,7 +33,7 @@
             <input class="input input-sm" type="text" v-model="personName.documents.cpf" placeholder="Nome"/>
           </td>
           <td class="text-center">
-            {{ personName.data_cadastro }}
+            {{ personName.created_at }}
           </td>
           <td class="text-center">
             {{ personName.role == 1 ? "Administrador" : "Visitante"}}
@@ -75,7 +75,7 @@
 
 <script>
 
-    import {peopleRef, rolesRef} from "../firebase";
+import {peopleRef, rolesRef} from "../firebase";
 
 export default {
   name: 'People',
@@ -83,7 +83,7 @@ export default {
         return {
             name: "",
             email: "",
-            data_acesso: "",
+            created_at: "",
             role: "",
             documents: {
                 cpf: ""
@@ -117,7 +117,7 @@ export default {
               cpf: person.documents.cpf
           },
           role: person.role,
-          data_cadastro: person.data_cadastro,
+          created_at: person.created_at,
           edit: false
       });
     },

@@ -20,6 +20,7 @@
 
 <script>
 
+  import {peopleRef} from "../firebase";
   import firebase from 'firebase';
 
   export default {
@@ -30,11 +31,39 @@
         password: ''
       }
     },
+    firebase: {
+      people: peopleRef
+    },
     methods: {
+      addPerson: function (name, email) {
+        for (var [key, object] of Object.entries(this.people)) {
+          // Se já possui o e-mail, sai do método
+          if (object.email == email) {
+            return false;
+          }
+        }
+
+        let date = new Date(),
+            day = date.getDate().toString(),
+            dayF = day.length == 1 ? "0" + day : day,
+            month = (date.getMonth() + 1).toString(), //+1 pois no getMonth Janeiro começa com zero.
+            monthF = month.length == 1 ? "0" + month : month,
+            yearF = date.getFullYear();
+
+        peopleRef.push({
+          name: name,
+          email: email,
+          documents: {
+            cpf: "00000000000"
+          },
+          created_at: dayF + "/" + monthF + "/" + yearF,
+          role: 2,
+          edit: false
+        });
+      },
       login: function() {
         firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(
           (user) => {
-            // login(result.additionalUserInfo.profile.name, result.additionalUserInfo.profile.email);
             for (var [key, value] of Object.entries(user.credential)) {
               localStorage.setItem(key, value);
             }
@@ -48,9 +77,8 @@
       },
       socialLogin() {
         const provider = new firebase.auth.GoogleAuthProvider;
-
         firebase.auth().signInWithPopup(provider).then((result) => {
-
+          this.addPerson(result.additionalUserInfo.profile.name, result.additionalUserInfo.profile.email);
           for (var [key, value] of Object.entries(result.credential)) {
             localStorage.setItem(key, value);
           }

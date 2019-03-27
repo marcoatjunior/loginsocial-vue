@@ -52,7 +52,7 @@ export default {
       errors: [],
       name: "",
       email: "",
-      data_acesso: "",
+      created_at: "",
       role: "",
       documents: {
         cpf: ""
@@ -66,6 +66,13 @@ export default {
   methods: {
     checkForm: function () {
       if (this.name && this.email && this.documents.cpf) {
+        for (var [key, object] of Object.entries(this.people)) {
+          if (object.email == this.email) {
+            this.errors = [];
+            this.errors.push('O endereço de e-mail informado já existe.');
+            return false;
+          }
+        }
         return true;
       }
 
@@ -103,7 +110,7 @@ export default {
           documents: {
             cpf: this.documents.cpf
           },
-          data_cadastro: diaF + "/" + mesF + "/" + anoF,
+          created_at: diaF + "/" + mesF + "/" + anoF,
           role: this.roles[1]['.value'],
           edit: false
         });
@@ -111,6 +118,7 @@ export default {
         this.name = "";
         this.email = "";
         this.documents.cpf = "";
+        this.created_at = "";
         this.role = "";
 
         this.$emit('hide');

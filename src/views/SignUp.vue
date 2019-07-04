@@ -33,8 +33,7 @@
     },
     methods: {
       addPerson: function (name, email) {
-
-          for (var [key, object] of Object.entries(this.people)) {
+          for (var [object] of Object.entries(this.people)) {
               // Se já possui o e-mail, sai do método
               if (object.email == email) {
                   return false;
@@ -68,8 +67,7 @@
               }
             this.$router.replace('home')
           },
-          (err) => {
-              console.log(err.message);
+          () => {
               alert('Ocorreu um erro ao efetuar o cadastro. Por favor, tente novamente.');
           }
         );

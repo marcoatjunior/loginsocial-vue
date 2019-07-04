@@ -72,7 +72,7 @@ export default {
           console.log('Uploaded a raw string!');
         });*/
 
-        for (var [key, object] of Object.entries(this.people)) {
+        for (var [object] of Object.entries(this.people)) {
           if (object.email == this.email) {
             this.errors = [];
             this.errors.push('O endereço de e-mail informado já existe.');

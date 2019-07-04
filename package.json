@@ -6,7 +6,7 @@
     "node": "8.10.0"
   },
   "scripts": {
-	"start": "npm run serve"
+	"start": "vue-cli-service serve"
   },
   "dependencies": {
     "bootstrap-vue": "^2.0.0-rc.15",
